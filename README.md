@@ -67,3 +67,52 @@ The platform supports AI-assisted document generation and modification.
 * Filesystem/tool integration
 * React + Python architecture
 * Local AI deployment
+
+
+                         ┌─────────────────────┐
+                         │     React App       │
+                         │                     │
+                         │ Chat │ Vision │ RAG │
+                         └──────────┬──────────┘
+                                    │
+                                    ▼
+                         ┌─────────────────────┐
+                         │    Python API       │
+                         │                     │
+                         │  Model Router       │
+                         └──────────┬──────────┘
+                                    │
+             ┌──────────────────────┼──────────────────────┐
+             │                      │                      │
+             ▼                      ▼                      ▼
+        ┌─────────┐            ┌──────────┐          ┌──────────┐
+        │  Qwen   │            │  Vision  │          │  Coder   │
+        │   LLM   │            │  Qwen-V  │          │ Qwen-C   │
+        └─────────┘            └──────────┘          └────┬─────┘
+                                                           │
+                                                           ▼
+                                                    ┌─────────────┐
+                                                    │ File System │
+                                                    └─────────────┘
+
+             ┌──────────────────────┐
+             │    RAG Pipeline       │
+             │ Documents → Chunks    │
+             │ → Embeddings → Search │
+             └──────────┬───────────┘
+                        │
+                        ▼
+                   Qwen / LLM
+
+             ┌──────────────────────┐
+             │        FLUX          │
+             │    Image Generation  │
+             └──────────────────────┘
+
+             ┌──────────────────────┐
+             │     VS Code          │
+             │      Extension       │
+             └──────────┬───────────┘
+                        │
+                        ▼
+                   Qwen-Coder
